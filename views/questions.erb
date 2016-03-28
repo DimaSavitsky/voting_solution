@@ -1,17 +1,32 @@
 <h2>Questions</h2>
 
+
 <div class="content">
-  <% QUESTIONS.each do |question| %>
-    <div class="question" >
-      <p><%= question.text %></p>
-      <span class="label label-default label-pill pull-xs-right"><%= question.id %>></span>
-      <ul class="list-group sortable">
-        <% question.variants.each do |variant| %>
-          <li class="list-group-item ui-state-default">
-            <%= variant %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <form>
+    <fieldset class="form-group">
+      <label for="name_input">Your name</label>
+      <input class="form-control" id="name_input" placeholder="Name">
+    </fieldset>
+    <% QUESTIONS.each do |question| %>
+      <fieldset class="form-group question">
+        <p><%= question.text %></p>
+
+        <span class="label label-default label-pill pull-xs-right"><%= question.id %>></span>
+
+        <ul class="list-group sortable">
+
+          <% question.variants.each do |variant| %>
+
+            <li class="list-group-item ui-state-default">
+              <%= variant %>
+            </li>
+
+          <% end %>
+
+        </ul>
+      </fieldset>
+    <% end %>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
 </div>
+
