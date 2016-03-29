@@ -19,6 +19,3 @@ DEPENDENCIES
   byebug
   rake (~> 10.0)
   sinatra (~> 1.4)
-
-BUNDLED WITH
-   1.11.2

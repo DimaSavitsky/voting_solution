@@ -8,7 +8,7 @@ class Connection
       {
         "type": "GOLANG",
         "chaincodeID":{
-            "path":"github.com/openblockchain/obc-peer/openchain/example/chaincode/chaincode_example02"
+            "path":"chaincodes/map"
         },
         "ctorMsg": {
             "function":"init",

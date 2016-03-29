@@ -11,7 +11,8 @@ vp0:
   ports:
     - "3001:30303"
     - "3005:5000"
-  # <HOST_PORT:CONTAINER_PORT>
+  volumes:
+    - ./chaincodes/:/go/src/chaincodes/
 
 vp1:
   image: besn0847/openchain-peer
@@ -28,7 +29,8 @@ vp1:
     - vp0
   ports:
     - "3002:30303"
-
+  volumes_from:
+    - vp0
 
 cli:
   image: besn0847/openchain-peer
