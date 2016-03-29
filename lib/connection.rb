@@ -3,25 +3,57 @@ require 'net/http'
 
 class Connection
 
+  def deploy
+    to_send = '
+      {
+        "type": "GOLANG",
+        "chaincodeID":{
+            "path":"github.com/openblockchain/obc-peer/openchain/example/chaincode/chaincode_example02"
+        },
+        "ctorMsg": {
+            "function":"init",
+            "args":["a", "100", "b", "200"]
+        }
+      }'
+    request('/devops/deploy', to_send)
+  end
+
 
   def invoke
-    res = Net::HTTP.post_form(uri + '/devops/invoke',
+    to_send = '
       {
-        chaincodeSpec: {
-          type: "GOLANG",
-          chaincodeID: {
-              name: "#{id}"
-            },
-          ctorMsg: {
-            function: 'invoke',
-            args: ['b', 'a', '10']
+        "chaincodeSpec": {
+          "type": "GOLANG",
+          "chaincodeID": {
+            "name": "' + id + '"
+          },
+          "ctorMsg": {
+            "function": "invoke",
+            "args": ["b", "a", "10"]
           }
         }
-      }
-    )
-    logger.info res
-  rescue => e
-    logger.error e.message
+      }'
+
+    request('/devops/invoke', to_send)
+  end
+
+  def query
+    to_send = '
+      {
+        "chaincodeSpec":{
+            "type": "GOLANG",
+            "chaincodeID":{
+                "name":"' + id + '"
+            },
+            "ctorMsg":{
+                "function":"query",
+                "args":["a"]
+            },
+            "secureContext": "jim"
+        }
+      }'
+
+    request('/devops/query', to_send)
   end
 
   private
@@ -34,7 +66,15 @@ class Connection
     @logger = Logger.new(STDOUT)
   end
 
+  def request(action, to_send)
+    http = Net::HTTP.new(uri.host, uri.port)
+    request = Net::HTTP::Post.new(action, initheader = {'Content-Type' =>'application/json'})
+    request.body = to_send
+    resp = http.request(request)
+
+    logger.info resp.body
+  rescue => e
+    logger.error e.message
+  end
+
 end
-
-
-'{"chaincodeSpec":{"type": "GOLANG","chaincodeID":{"name":"e58eb9f63a3434fd50d35b24897a88a0d7375a82021bacfc4e8299ddbaa6af7bfb7fe03df53b842ba6b512b16c3550e2c8f4537493408a3e6e8bd8eb19fc7523"},"ctorMsg":{ "function":"invoke","args":["a", "b", "10"]} }}'
