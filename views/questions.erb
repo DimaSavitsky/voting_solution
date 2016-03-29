@@ -2,22 +2,23 @@
 
 
 <div class="content">
-  <form>
+  <form action="/vote" method="post">
     <fieldset class="form-group">
       <label for="name_input">Your name</label>
       <input class="form-control" id="name_input" placeholder="Name">
     </fieldset>
-    <% QUESTIONS.each do |question| %>
+    <% QUESTIONS.each_with_index do |question, index| %>
       <fieldset class="form-group question">
         <p><%= question.text %></p>
 
-        <span class="label label-default label-pill pull-xs-right"><%= question.id %>></span>
+        <input name="question[<%= index %>][id]" type="hidden" value="<%= question.id %>"/>
 
         <ul class="list-group sortable">
 
-          <% question.variants.each do |variant| %>
+          <% question.variants.each_with_index do |variant, variant_index| %>
 
             <li class="list-group-item ui-state-default">
+              <input name="question[<%= index %>][vote][]" type="hidden" value="<%= variant_index %>"/>
               <%= variant %>
             </li>
 
