@@ -11,27 +11,38 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link rel="stylesheet" href="/stylesheets/main.css" />
   <link rel="stylesheet" href="/stylesheets/bootstrap.min.css" />
-  <link rel="stylesheet" href="/stylesheets/bootstrap-theme.min.css" />
-  <link rel="stylesheet" href="/stylesheets/bootstrap-responsive.min.css" />
+  <link rel="stylesheet" href="/stylesheets/main.css" />
+
 </head>
 <body>
-<div class="container-fluid">
-  <header class="branding">
-    <h1>Voting Solution</h1>
-  </header>
+  <div class="container-fluid nav-custom">
 
-  <div class="main">
-    <%= yield %>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+          <div class="pull-left"><h2>Voting Solution</h2></div>
+          <div class="pull-right">
+            v.0.0.1
+          </div>
+        </div>
+
+      </div>
+    </div>
+
   </div>
 
-  <footer class="branding">
-    <small>&copy; <%= Time.now.year %></small>
-  </footer>
-</div>
+  <div class="main container">
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="/javascripts/bootstrap.min.js"></script>
 <!--[if lt IE 7]>
 <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
 <script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>

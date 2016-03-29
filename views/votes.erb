@@ -1,14 +1,75 @@
-<h2>Votes</h2>
 
-<div class="vote">
-  <form action="/questions">
-    <button type="submit" class="btn btn-primary">Vote</button>
-  </form>
+<div class="row">
+  <div class="col-sm-6">
+    <h2>Votes</h2>
+  </div>
+  <div class="col-sm-6 text-right">
+    <form action="/questions">
+      <button type="submit" class="btn btn-primary btn-vote">New vote</button>
+    </form>
+  </div>
 </div>
 
-<div class="content">
 
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
+  <div class=" user panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a class="btn-block" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+          Name
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+        <div class="votes">
+          <% QUESTIONS.each_with_index do |question, index| %>
+            <div class="question-votes">
+              <h4><%= question.text %></h4>
+
+              <ul class="votes">
+                <% question.variants.each_with_index do |variant, variant_index| %>
+                  <li><%= variant %></li>
+                <%end %>
+              </ul>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class=" user panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a class="btn-block" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Name 2
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+        <div class="votes">
+          <% QUESTIONS.each_with_index do |question, index| %>
+            <div class="question-votes">
+              <h4><%= question.text %></h4>
+
+              <ul class="votes">
+                <% question.variants.each_with_index do |variant, variant_index| %>
+                  <li>
+                    <%= variant %>
+                  </li>
+                <%end %>
+              </ul>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </div>
+
+
 

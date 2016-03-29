@@ -1,7 +1,7 @@
 <h2>Questions</h2>
 
 
-<div class="content">
+<div class="">
   <form action="/vote" method="post">
     <fieldset class="form-group">
       <label for="name_input">Your name</label>
@@ -9,7 +9,7 @@
     </fieldset>
     <% QUESTIONS.each_with_index do |question, index| %>
       <fieldset class="form-group question">
-        <p><%= question.text %></p>
+        <h4><%= question.text %></h4>
 
         <input name="question[<%= index %>][id]" type="hidden" value="<%= question.id %>"/>
 
@@ -17,8 +17,8 @@
 
           <% question.variants.each_with_index do |variant, variant_index| %>
 
-            <li class="list-group-item ui-state-default">
-              <input name="question[<%= index %>][vote][]" type="hidden" value="<%= variant_index %>"/>
+            <li class="panel panel-draggable ui-state-default">
+              <input name="question[<%= index %>][vote][]" type="hidden" value="<%= variant_index + 1 %>"/>
               <%= variant %>
             </li>
 
@@ -28,6 +28,10 @@
       </fieldset>
     <% end %>
     <button type="submit" class="btn btn-primary">Submit</button>
+
+    <a href="/">
+      <input type="button" class="btn btn-default" value="Cancel" />
+    </a>
   </form>
 </div>
 

@@ -11,6 +11,7 @@ class VotingSolution < Sinatra::Base
   end
 
   post "/vote" do
+    puts params
     redirect '/'
   end
 
