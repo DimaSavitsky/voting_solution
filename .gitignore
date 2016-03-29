@@ -3,6 +3,7 @@
 /vendor/bundle
 .byebug_history
 config/openblockchain.yml
+!.ruby-version
 
 # these should all be checked in to normalise the environment:
 # Gemfile.lock, .ruby-version, .ruby-gemset
